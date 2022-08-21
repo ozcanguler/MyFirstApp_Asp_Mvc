@@ -18,11 +18,11 @@ namespace MyFirstApp_Asp_Mvc
             //    url: "{controller}/{action}/{id}",
             //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             //);
-            routes.MapRoute(
-             name: "Login",
-             url: "{Login}",
-             defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
-         );
+         ////   routes.MapRoute(
+         ////    name: "Login",
+         ////    url: "{Login}",
+         ////    defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
+         ////);
 
             //    routes.MapRoute(
             //    name: "Login",
@@ -30,11 +30,11 @@ namespace MyFirstApp_Asp_Mvc
             //    defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             //);
 
-            routes.MapRoute(
-               name: "Test",
-               url: "test/{action}",
-               defaults: new { controller = "Test", action = "Printmessage", id = UrlParameter.Optional }
-           );
+           //// routes.MapRoute(
+           ////    name: "Test",
+           ////    url: "test/{action}",
+           ////    defaults: new { controller = "Test", action = "Printmessage", id = UrlParameter.Optional }
+           ////);
             routes.MapRoute(
               name: "Default",
               url: "{controller}/{action}/{id}",
