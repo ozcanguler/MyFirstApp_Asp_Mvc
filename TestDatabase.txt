@@ -4,3 +4,13 @@ CREATE TABLE [dbo].[Users] (
     [password] NVARCHAR (50) NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+CREATE TABLE [dbo].[Movies] (
+    [Id]        INT            IDENTITY (1, 1) NOT NULL,
+    [name]      NVARCHAR (50)  NULL,
+    [year]      INT            NULL,
+    [storyline] NVARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+INSERT INTO dbo.Movies(name,year,storyline) VALUES('The Shawshank Redemption',1994,'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.');
+INSERT INTO dbo.Movies(name,year,storyline) VALUES('The Godfather',1972,'The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.');
+INSERT INTO dbo.Movies(name,year,storyline) VALUES('The Dark Knight',2008,'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.');
