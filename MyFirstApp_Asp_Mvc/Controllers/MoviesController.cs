@@ -21,9 +21,32 @@ namespace MyFirstApp_Asp_Mvc.Controllers
         }
         public ActionResult Details(int id)
         {
-            MovieDAO movieDAO = new MovieDAO();      //dependency injection
+            MovieDAO movieDAO = new MovieDAO();     
             FilmModel film = movieDAO.FetchOne(id);
             return View("Details", film);
+        }
+        public ActionResult ProcessCreate(FilmModel filmModel)
+        {
+            MovieDAO movieDAO = new MovieDAO();
+            movieDAO.CreateOrUpdate(filmModel);
+            return View("Details", filmModel);
+        }
+        public ActionResult Create()
+        {
+            return View("MovieForm");
+        }
+        public ActionResult Edit(int id)
+        {
+            MovieDAO movieDAO = new MovieDAO();      
+            FilmModel film = movieDAO.FetchOne(id);
+            return View("MovieForm", film);
+        }
+        public ActionResult Delete(int id)
+        {
+            MovieDAO movieDAO = new MovieDAO();     
+            movieDAO.Delete(id);
+            List<FilmModel> films = movieDAO.FetchAll(); 
+            return View("Index", films);
         }
     }
 }

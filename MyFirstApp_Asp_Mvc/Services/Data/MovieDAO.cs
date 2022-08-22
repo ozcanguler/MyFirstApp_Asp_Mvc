@@ -69,5 +69,57 @@ namespace MyFirstApp_Asp_Mvc.Services.Data
 
             
         }
+
+        public int CreateOrUpdate(FilmModel filmModel)
+        {
+            string sqlQuery = "";
+            if (filmModel.Id <= 0)
+            {
+                sqlQuery= "INSERT INTO dbo.Movies VALUES(@name,@year,@storyline)";
+            }
+            else
+            {
+                sqlQuery = "UPDATE dbo.Movies SET name=@name,year=@year,storyline=@storyline where Id=@Id";
+            }
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.Add("@Id", System.Data.SqlDbType.Int).Value = filmModel.Id;
+                command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, 200).Value = filmModel.Name;
+                command.Parameters.Add("@year", System.Data.SqlDbType.Int).Value = filmModel.Year;
+                command.Parameters.Add("@storyline", System.Data.SqlDbType.VarChar, 2000).Value = filmModel.Storyline;
+                connection.Open();
+
+                int newId = command.ExecuteNonQuery();
+
+                FilmModel filmModel1 = new FilmModel();
+
+
+                return newId;
+            }
+
+
+        }
+        internal int Delete(int id)
+        {
+            string sqlQuery = "Delete from dbo.Movies where Id=@id";
+           
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+               
+                connection.Open();
+
+                int deleteId = command.ExecuteNonQuery();
+
+                FilmModel filmModel1 = new FilmModel();
+
+
+                return deleteId;
+            }
+
+
+        }
     }
 }
