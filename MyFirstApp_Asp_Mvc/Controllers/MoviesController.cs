@@ -48,5 +48,15 @@ namespace MyFirstApp_Asp_Mvc.Controllers
             List<FilmModel> films = movieDAO.FetchAll(); 
             return View("Index", films);
         }
+        public ActionResult SearchForm()
+        {
+            return View("SearchForm");
+        }
+        public ActionResult SearchForName(string searchPhrase)
+        {
+            MovieDAO movieDAO = new MovieDAO();
+            List<FilmModel> searchResults = movieDAO.SearchForName(searchPhrase);
+            return View("Index", searchResults);
+        }
     }
 }

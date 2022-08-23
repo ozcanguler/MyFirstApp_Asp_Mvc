@@ -121,5 +121,39 @@ namespace MyFirstApp_Asp_Mvc.Services.Data
 
 
         }
+        internal List<FilmModel> SearchForName(string searchPhrase)
+        {
+            List<FilmModel> returnlist = new List<FilmModel>();
+
+            //access the database
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sqlQuery = "select * from dbo.Movies WHERE name LIKE @searchForMe";
+
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.Add("@searchForMe", System.Data.SqlDbType.NVarChar).Value = "%" + searchPhrase + "%";
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        //create a new gadget object. Add it to the list to return.
+                        FilmModel films = new FilmModel();
+                        films.Id = reader.GetInt32(0);
+                        films.Name = reader.GetString(1);
+                        films.Year = reader.GetInt32(2);
+                        films.Storyline = reader.GetString(3);
+
+                        returnlist.Add(films);
+                    }
+                }
+                return returnlist;
+            }
+
+        }
     }
 }
